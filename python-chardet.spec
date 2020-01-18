@@ -1,14 +1,14 @@
 %{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           python-chardet
-Version:        2.2.1
-Release:        3%{?dist}
+Version:        2.0.1
+Release:        6%{?dist}
 Summary:        Character encoding auto-detection in Python
 
 Group:          Development/Languages
 License:        LGPLv2
-URL:            https://github.com/chardet/chardet
-Source0:        https://pypi.python.org/packages/source/c/chardet/chardet-2.2.1.tar.gz
+URL:            http://chardet.feedparser.org
+Source0:        http://chardet.feedparser.org/download/python2-chardet-%{version}.tgz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:      noarch
@@ -19,8 +19,7 @@ Character encoding auto-detection in Python. As
 smart as your browser. Open source.
 
 %prep
-%setup -q -n chardet-%{version}
-sed -ie '1d' chardet/chardetect.py
+%setup -q -n python2-chardet-%{version}
 
 
 
@@ -32,6 +31,7 @@ sed -ie '1d' chardet/chardetect.py
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__python} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
+chmod -x COPYING
  
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -39,28 +39,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc LICENSE README.rst
+%doc COPYING
 # For noarch packages: sitelib
 %{python_sitelib}/*
-%{_bindir}/chardetect
 
 
 %changelog
-* Tue Dec 18 2018 Lumír Balhar <lbalhar@redhat.com> - 2.2.1-3
-- Fix upstream URL
-- Resolves: rhbz#1579178
-
-* Fri Aug 07 2015 Matej Stuchlik <mstuchli@redhat.com> - 2.2.1-2
-- Bump release to fix upgrade path
-Resolves: rhbz#1226899
-
-* Mon Jun 01 2015 Matej Stuchlik <mstuchli@redhat.com> - 2.2.1-1
-- Update to 2.2.1
-Resolves: rhbz#1226899
-
-* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 2.0.1-7
-- Mass rebuild 2013-12-27
-
 * Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0.1-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
 
