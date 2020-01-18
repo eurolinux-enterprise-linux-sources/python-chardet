@@ -2,12 +2,12 @@
 
 Name:           python-chardet
 Version:        2.2.1
-Release:        1%{?dist}
+Release:        3%{?dist}
 Summary:        Character encoding auto-detection in Python
 
 Group:          Development/Languages
 License:        LGPLv2
-URL:            http://chardet.feedparser.org
+URL:            https://github.com/chardet/chardet
 Source0:        https://pypi.python.org/packages/source/c/chardet/chardet-2.2.1.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -46,13 +46,17 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Wed Jul 22 2015 Scientific Linux Auto Patch Process <SCIENTIFIC-LINUX-DEVEL@LISTSERV.FNAL.GOV>
-- Eliminated rpmbuild "bogus date" error due to inconsistent weekday,
-  by assuming the date is correct and changing the weekday.
+* Tue Dec 18 2018 Lumír Balhar <lbalhar@redhat.com> - 2.2.1-3
+- Fix upstream URL
+- Resolves: rhbz#1579178
+
+* Fri Aug 07 2015 Matej Stuchlik <mstuchli@redhat.com> - 2.2.1-2
+- Bump release to fix upgrade path
+Resolves: rhbz#1226899
 
 * Mon Jun 01 2015 Matej Stuchlik <mstuchli@redhat.com> - 2.2.1-1
 - Update to 2.2.1
-Resolves: rhbz#1233113
+Resolves: rhbz#1226899
 
 * Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 2.0.1-7
 - Mass rebuild 2013-12-27
